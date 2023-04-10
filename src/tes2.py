@@ -44,6 +44,24 @@ def bacaFile(filename):
         filename = input("Masukkan nama file: ")
         return bacaFile(filename)
     
+def bacaFile2(filename):
+    file = open(filename, "r")
+    file = file.readlines()
+
+    matrix = []
+    coordinates = {}
+    for i in range(len(file)):
+        file[i] = file[i].split(" " or ",")
+        if(len(file[i])==3):
+            coordinates[i-len(file[0])+1] = np.array([int(file[i][1]), int(file[i][2])])
+        else:
+            temp = []
+            for j in range(len(file[i])):
+                file[i][j] = int(file[i][j])
+                temp.append(file[i][j])
+            matrix.append(temp)
+    return matrix, coordinates
+    
 def convertMatrixToDict(matrix):
     ## baru buat semalem tapi sekarang udah lupa cara bikinnya wkwkwk
     temp = []
