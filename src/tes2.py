@@ -1,4 +1,5 @@
 from queue import PriorityQueue
+import numpy as np
 
 
 def mintaInputInt(string, max=10):
@@ -79,27 +80,30 @@ def UCS(start, end, dict):
     hasil = []
     avail = PriorityQueue()
     # cost, path
-    avail.put((0, str(start)))
+    avail.put((0, [start]))
     target = end
+    print(dict)
 
     while not avail.empty():
         cost, path = avail.get()
-        curr = int(path[-1])
+        tempPath = path.copy()
+        curr = path[len(path)-1]
         visited.append(path)
         for i in dict[curr-1]:
-            if str(i) not in path:
+            path = tempPath.copy()
+            if i not in path:
                 if(curr != target):
-                    avail.put((cost + dict[curr-1][i], path + str(i)))
-                    hasil.append((cost + dict[curr-1][i], (path + str(i))))
-    
+                    path.append(i)
+                    avail.put((cost + dict[curr-1][i], path))
+                    hasil.append((cost + dict[curr-1][i], (path)))
     #cari nilai minimum
     min = 9999999
-    path = str
+    path = list
     for i in range(len(hasil)):
-        if hasil[i][1][0] == str(start) and hasil[i][1][-1] == str(end):
+        if hasil[i][1][0] == (start) and hasil[i][1][len(hasil[i][1])-1] == (end):
             if(hasil[i][0] < min):
                 min = hasil[i][0]         
-                path = hasil[i][1]     
+                path = (hasil[i][1])
     
     return hasil, visited, min, path
     
@@ -116,16 +120,7 @@ def printPath(path):
         else:
             print(path[i],"-> ", end="")
     print()
-    
-# a = mintaInputInt("Masukkan Node Awal: ")
-# b = mintaInputInt("Masukkan Node Tujuan: ")
 
-
-
-# mat = bacaFile("mat3.txt")
-# printMatrix(mat)
-
-# print(a,b)
 
 
 
