@@ -1,4 +1,4 @@
-from tes2 import *
+# from tes2 import *
 import networkx as nx
 import matplotlib.pyplot as plt
 from SplashScreen import *
@@ -15,8 +15,7 @@ print("===========================================")
 filename = input("Masukkan nama file: ")
 
 #baca file
-# matrix = bacaFile()
-matrix, koordinat = bacaFile2(filename)
+matrix, koordinat, nama = bacaFile2(filename)
 
 print("Pilih Algorithm yang ingin digunakan: ")
 print("1. UCS")
@@ -31,7 +30,9 @@ if(algo==1):
 elif(algo==2):
     print("Kamu memilih A*")
 
-
+print("DAFTAR NODE:")
+for i,j in enumerate(nama):
+    print(i+1, j)
 a = mintaInputInt("Masukkan Node Awal: ", len(matrix))
 b = mintaInputInt("Masukkan Node Tujuan: ", len(matrix))
 
@@ -42,13 +43,13 @@ dictMat = convertMatrixToDict(matrix)
 if(algo==1):
     hasil, visited, cost, path = UCS(a, b, dictMat)
     print("Hasil UCS: ")
-    printPath(path)
     print("Jarak:", cost,"Meter")
-    # print("UCS")
+    printPath(path, nama)
 elif(algo==2):
     hasil, visited, cost, path = AStar(a, b, dictMat, koordinat)
-    printPath(path)
+    print("Hasil A*: ")
     print("Jarak:", cost,"Meter")
+    printPath(path, nama)
 
 # Membuat objek graf kosong
 G = nx.Graph()
