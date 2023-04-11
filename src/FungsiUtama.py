@@ -8,12 +8,11 @@ def UCS(start, end, dict):
     # cost, path
     avail.put((0, [start]))
     target = end
-    print(dict)
 
     while not avail.empty():
         cost, path = avail.get()
         tempPath = path.copy()
-        curr = path[len(path)-1]
+        curr = path[-1]
         visited.append(path)
         for i in dict[curr-1]:
             path = tempPath.copy()
@@ -26,7 +25,7 @@ def UCS(start, end, dict):
     min = 9999999
     path = list
     for i in range(len(hasil)):
-        if hasil[i][1][0] == (start) and hasil[i][1][len(hasil[i][1])-1] == (end):
+        if hasil[i][1][0] == (start) and hasil[i][1][-1] == (end):
             if(hasil[i][0] < min):
                 min = hasil[i][0]         
                 path = (hasil[i][1])
@@ -50,8 +49,8 @@ def AStar(start, end, dict, coordinate):
         cost, path = avail.get(0)
         # print("path saat ini", path)
         tempPath = path.copy()
-        print(path)
-        print(path[len(path)-1])
+        # print(path)
+        # print(path[len(path)-1])
         curr = path[len(path)-1]
         if curr == target:
             break
@@ -67,7 +66,7 @@ def AStar(start, end, dict, coordinate):
                     # avail.put((cost + dict[curr-1][i] + heuristic[i-1] , path))
                     avail.put((cost + dict[curr-1][i] + getHeuristic(i, end, coordinate) , path))
                     hasil.append((cost + (dict[curr-1][i]) , (path)))
-                    print(curr-1," = ", hasil[len(hasil)-1])
+                    # print(curr-1," = ", hasil[len(hasil)-1])
                     count += 1
     
     return hasil, visited, cost, path
