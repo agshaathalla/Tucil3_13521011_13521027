@@ -1,8 +1,11 @@
 from tes2 import *
 import networkx as nx
 import matplotlib.pyplot as plt
+from SplashScreen import *
+from FungsiUtama import *
+from FungsiTambahan import *
 
-
+splashScreen()
 print("===========================================")
 
 
@@ -43,7 +46,7 @@ if(algo==1):
     print("Jarak:", cost,"Meter")
     # print("UCS")
 elif(algo==2):
-    hasil, visited, cost, path = AStar(a, b, dictMat)
+    hasil, visited, cost, path = AStar(a, b, dictMat, koordinat)
     printPath(path)
     print("Jarak:", cost,"Meter")
 
