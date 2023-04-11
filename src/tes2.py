@@ -106,6 +106,52 @@ def UCS(start, end, dict):
                 path = (hasil[i][1])
     
     return hasil, visited, min, path
+
+def getHeuristic(start, end, coordinate):
+    x = coordinate[start][0] - coordinate[end][0]
+    y = coordinate[start][1] - coordinate[end][1]
+    return np.linalg.norm(np.array([x,y]))
+
+def AStar(start, end, dict, coordinate):
+    visited = []
+    hasil = []
+    avail = PriorityQueue()
+    
+    # cost, path
+    avail.put((0, [start]))
+    target = end
+    count = 0
+
+    if start == end:
+        return hasil, visited, 0, [start], count
+
+    while not avail.empty():
+        cost, path = avail.get(0)
+        # print("path saat ini", path)
+        tempPath = path.copy()
+        print(path)
+        print(path[len(path)-1])
+        curr = path[len(path)-1]
+        if curr == target:
+            break
+        if cost>0:
+            # cost -= heuristic[path[-1]-1]
+            cost -= getHeuristic(path[-1], end, coordinate)
+        visited.append(path)
+        for i in dict[curr-1]:
+            path = tempPath.copy()
+            if i not in path:
+                if(curr != target):
+                    path.append(i)
+                    # avail.put((cost + dict[curr-1][i] + heuristic[i-1] , path))
+                    avail.put((cost + dict[curr-1][i] + getHeuristic(i, end, coordinate) , path))
+                    hasil.append((cost + (dict[curr-1][i]) , (path)))
+                    print(curr-1," = ", hasil[len(hasil)-1])
+                    count += 1
+    
+    return hasil, visited, cost, path, count
+
+
     
 def printMatrix(matrix):
     for i in range(len(matrix)):
