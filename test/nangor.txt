@@ -1,7 +1,8 @@
+Terminal,Pintu Tol,Pasar Resik,Puteran ITB,ITB,Caringin,Kp Geulis,Puteran Mixue,Jalan Sayang,Gerlam,Kos Yunis,Wasabi,Puri Indah,Kos Salman
 0 516 0 0 0 0 0 0 0 0 0 0 0 0
 516 0 260 0 0 0 0 0 0 0 0 0 0 0
 0 260 0 977 0 0 0 0 0 0 0 0 0 0
-0 0 0 0 286 155 0 0 0 0 0 0 0 0
+0 0 977 0 286 155 0 0 0 0 0 0 0 0
 0 0 0 286 0 0 0 521 0 1007 0 0 0 0
 0 0 0 155 0 0 158 0 0 0 0 426 0 0
 0 0 0 0 0 158 0 314 0 0 360 0 0 0
