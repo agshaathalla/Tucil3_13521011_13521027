@@ -27,13 +27,11 @@ def showMap(koordinat, path):
         latitude_list.append(koordinat[i][1])
         longitude_list.append(koordinat[i][0])
 
-    # print(latitude_list)
-    # print(longitude_list)
     
     lat_Tengah, long_Tengah = findTengah(koordinat)
 
 
-    gmap = gmplot.GoogleMapPlotter(lat_Tengah, long_Tengah, 15, map_type='roadmap', apikey='')
+    gmap = gmplot.GoogleMapPlotter(lat_Tengah, long_Tengah, 16, map_type='roadmap', apikey='')
 
     gmap.scatter( latitude_list, longitude_list, '#FF0000',size = 40, marker = False )
     gmap.plot(latitude_list, longitude_list, 'cornflowerblue', edge_width = 2.5)
