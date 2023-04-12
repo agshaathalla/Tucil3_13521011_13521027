@@ -11,6 +11,12 @@ def UCS(start, end, dict):
 
     if start == end:
         return hasil, visited, 0, [start]
+    if(len(dict[start-1])==0):
+        print("Tidak ada jalur")
+        return hasil, visited, 0, [start]
+    elif(len(dict[end-1])==0):
+        print("Tidak ada jalur")
+        return hasil, visited, 0, [end]
     
     while not avail.empty():
         cost, path = avail.get()
@@ -47,6 +53,13 @@ def AStar(start, end, dict, coordinate):
 
     if start == end:
         return hasil, visited, 0, [start]
+    
+    if(len(dict[start-1])==0):
+        print("Tidak ada jalur")
+        return hasil, visited, 0, [start]
+    elif(len(dict[end-1])==0):
+        print("Tidak ada jalur")
+        return hasil, visited, 0, [end]
 
     while not avail.empty():
         cost, path = avail.get(0)
