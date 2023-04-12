@@ -57,7 +57,7 @@ def bacaFile2(filename):
                 file[i] = file[i].split(" ")
             if(i==0):
                 for j in range(len(file[0])):
-                    namaTempat.append(file[i][j])
+                    namaTempat.append(file[i][j].strip())
             elif(len(file[i])==3):
                 coordinates[i-len(file[1])] = np.array([float(file[i][1]), float(file[i][2])])
             else:
@@ -126,7 +126,6 @@ def convertMatrixToDict(matrix):
                 tempDict[j+1] = matrix[i][j]
         temp.append(tempDict)
     return temp
-
 
 
 

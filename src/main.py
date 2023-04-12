@@ -1,9 +1,11 @@
 # from tes2 import *
 import networkx as nx
 import matplotlib.pyplot as plt
+import webbrowser
 from SplashScreen import *
 from FungsiUtama import *
 from FungsiTambahan import *
+from maps import *
 
 def main():
     splashScreen()
@@ -78,6 +80,12 @@ def main():
     # setting buat warnain edge
     edges = G.edges()
     colors = [G[u][v]['color'] for u,v in edges]
+    
+    showMap(koordinat, path)
+    tanyaMaps = input("Apakah ingin menampilkan maps? (Y/N): ")
+    if(tanyaMaps=="Y" or tanyaMaps=="y"):
+        webbrowser.open_new_tab('file://'+os.getcwd()+'bin/maps.html')
+    
 
     # Menggambar graf menggunakan matplotlib
     nx.draw_networkx_labels(G, koordinat)
@@ -86,6 +94,8 @@ def main():
     labels = nx.get_edge_attributes(G, 'weight')
     nx.draw_networkx_edge_labels(G, koordinat, edge_labels=labels)
     plt.show()
+    
+    
 
     pilihan = input("Apakah ingin mengulang pencarian? (Y/N): ")
     if(pilihan=="Y" or pilihan=="y"):
