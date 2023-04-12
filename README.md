@@ -10,7 +10,7 @@ Program ini adalah program untuk menentukan lintasan terpendek dari suatu titik 
 │       maps.html
 │       
 ├───doc
-│       buatdoc.txt
+│       Tucil3_13521011_13521027.pdf
 │       
 ├───src
 │       FungsiTambahan.py
