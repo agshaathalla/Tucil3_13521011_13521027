@@ -7,14 +7,25 @@ from FungsiUtama import *
 from FungsiTambahan import *
 from maps import *
 
+
 def main():
     splashScreen()
     print("===========================================")
 
-    filename = input("Masukkan nama file: ")
+    isiFolder = os.listdir(os.getcwd()+'/test')
+    # print(os.listdir(os.getcwd()+'/test'))
+
+    print("Daftar peta yang tersedia dalam folder test: ")
+    for i in range(len(isiFolder)):
+        print(i+1, isiFolder[i].replace(".txt", ""))
+
+    inputFile = int(input("Pilih nomor file yang ingin dibuka: "))
+    while(int(inputFile)<1 or int(inputFile)>len(isiFolder)):
+        inputFile = input("Pilih nomor file yang ingin dibuka: ")
 
     #baca file
-    matrix, koordinat, nama = bacaFile2(filename)
+    matrix, koordinat, nama = bacaFile2(os.getcwd()+'/test/'+isiFolder[int(inputFile)-1])
+    print()
 
     print("Pilih Algorithm yang ingin digunakan: ")
     print("1. UCS")
@@ -81,10 +92,6 @@ def main():
     edges = G.edges()
     colors = [G[u][v]['color'] for u,v in edges]
     
-    showMap(koordinat, path)
-    tanyaMaps = input("Apakah ingin menampilkan maps? (Y/N): ")
-    if(tanyaMaps=="Y" or tanyaMaps=="y"):
-        webbrowser.open_new_tab('file://'+os.getcwd()+'bin/maps.html')
     
 
     # Menggambar graf menggunakan matplotlib
@@ -93,9 +100,16 @@ def main():
     nx.draw_networkx_nodes(G, koordinat, node_color=node_colors, node_size=500)
     labels = nx.get_edge_attributes(G, 'weight')
     nx.draw_networkx_edge_labels(G, koordinat, edge_labels=labels)
+    print("Visualisasi Graf akan ditampilkan")
+    print("Tutup visualisasi untuk melanjutkan")
     plt.show()
     
     
+    showMap(koordinat, path)
+    tanyaMaps = input("Apakah ingin menampilkan maps? (Y/N): ")
+    if(tanyaMaps=="Y" or tanyaMaps=="y"):
+        print("Maps akan ditampilkan")
+        webbrowser.open_new_tab('file://'+os.getcwd()+'/bin/maps.html')
 
     pilihan = input("Apakah ingin mengulang pencarian? (Y/N): ")
     if(pilihan=="Y" or pilihan=="y"):
