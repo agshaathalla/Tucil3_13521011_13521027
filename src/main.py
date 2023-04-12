@@ -97,9 +97,10 @@ def main():
     print("Tutup visualisasi untuk melanjutkan")
     plt.show()
     
-    showMap(koordinat, path)
+    
     tanyaMaps = input("Apakah ingin menampilkan maps? (Y/N): ")
     if(tanyaMaps=="Y" or tanyaMaps=="y"):
+        showMap(koordinat, path)
         print("Maps akan ditampilkan")
         webbrowser.open_new_tab('file://'+os.getcwd()+'/bin/maps.html')
 
