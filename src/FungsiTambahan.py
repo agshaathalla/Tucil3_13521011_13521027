@@ -4,7 +4,10 @@ def mintaInputInt(string, max=10):
     try:
         x = int(input(string))
         if(x > max):
-            print("Input harus kurang dari", max)
+            print("Input harus kurang dari sama dengan", max)
+            return mintaInputInt(string, max)
+        elif(x < 0):
+            print("Input harus lebih dari 0")
             return mintaInputInt(string, max)
         return x
     except:
@@ -12,37 +15,6 @@ def mintaInputInt(string, max=10):
         return mintaInputInt(string)
     
 def bacaFile(filename):
-    try:
-        file = open(filename, "r")
-        file = file.readlines()
-        matrix = []
-        for i in range(len(file)):
-            temp = []
-            file[i] = file[i].split(" " or ",")
-            for j in range(len(file[i])):
-                file[i][j] = int(file[i][j])
-                temp.append(file[i][j])
-            matrix.append(temp)
-                
-            # Validasi jumlah node perbaris
-            if(i>0 and len(file[i]) != len(file[i-1])):
-                print("Jumlah node perbaris tidak sama")
-                filename = input("Masukkan nama file lain: ")
-                return bacaFile(filename)
-            
-        # Validasi apakah jumlah node kurang dari 8
-        if(len(matrix[0])<8):
-            print("Jumlah node kurang dari 8")
-            filename = input("Masukkan nama file lain: ")
-            return bacaFile(filename)
-                
-        print("File berhasil dibaca")
-        return matrix
-    except:
-        print("File tidak ditemukan atau tidak dapat dibuka")
-        filename = input("Masukkan nama file: ")
-        return bacaFile(filename)
-def bacaFile2(filename):
     try:
         file = open(filename, "r")
         file = file.readlines()
@@ -70,13 +42,13 @@ def bacaFile2(filename):
                 if(i>0 and len(file[i]) != len(file[i-1])):
                     print("Jumlah node perbaris tidak sama")
                     filename = input("Masukkan nama file lain: ")
-                    return bacaFile2(filename)
+                    return bacaFile(filename)
         
         # Validasi apakah jumlah node kurang dari 8
         if(len(matrix[0])<8):
             print("Jumlah node kurang dari 8")
             filename = input("Masukkan nama file lain: ")
-            return bacaFile2(filename)
+            return bacaFile(filename)
         
         for i in range(len(matrix)):
             for j in range(len(matrix[i])):
@@ -84,19 +56,19 @@ def bacaFile2(filename):
                 if(matrix[i][j] != matrix[j][i]):
                     print("Matrix tidak simetris")
                     filename = input("Masukkan nama file lain: ")
-                    return bacaFile2(filename)
+                    return bacaFile(filename)
                 #validasi apakah matrix diagonal nol
                 if(matrix[i][i]!=0):
                     print("Diagonal matrix tidak nol")
                     filename = input("Masukkan nama file lain: ")
-                    return bacaFile2(filename)
+                    return bacaFile(filename)
                 
         print("File berhasil dibaca")        
         return matrix, coordinates, namaTempat
     except:
         print("File tidak ditemukan atau tidak dapat dibuka")
         filename = input("Masukkan nama file: ")
-        return bacaFile2(filename)
+        return bacaFile(filename)
 
 def getHeuristic(start, end, coordinate):
     x = coordinate[start][0] - coordinate[end][0]

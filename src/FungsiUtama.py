@@ -9,6 +9,9 @@ def UCS(start, end, dict):
     avail.put((0, [start]))
     target = end
 
+    if start == end:
+        return hasil, visited, 0, [start]
+    
     while not avail.empty():
         cost, path = avail.get()
         tempPath = path.copy()

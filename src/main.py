@@ -13,18 +13,15 @@ def main():
     print("===========================================")
 
     isiFolder = os.listdir(os.getcwd()+'/test')
-    # print(os.listdir(os.getcwd()+'/test'))
 
     print("Daftar peta yang tersedia dalam folder test: ")
     for i in range(len(isiFolder)):
         print(i+1, isiFolder[i].replace(".txt", ""))
 
-    inputFile = int(input("Pilih nomor file yang ingin dibuka: "))
-    while(int(inputFile)<1 or int(inputFile)>len(isiFolder)):
-        inputFile = input("Pilih nomor file yang ingin dibuka: ")
+    inputFile = mintaInputInt("Pilih nomor file yang ingin dibuka: ", len(isiFolder))
 
     #baca file
-    matrix, koordinat, nama = bacaFile2(os.getcwd()+'/test/'+isiFolder[int(inputFile)-1])
+    matrix, koordinat, nama = bacaFile(os.getcwd()+'/test/'+isiFolder[int(inputFile)-1])
     print()
 
     print("Pilih Algorithm yang ingin digunakan: ")
@@ -48,7 +45,6 @@ def main():
 
     #convert ke dictionary
     dictMat = convertMatrixToDict(matrix)
-
 
     if(algo==1):
         hasil, visited, cost, path = UCS(a, b, dictMat)
@@ -78,7 +74,6 @@ def main():
                 # warnain edge yang ga dikunjungin jadi hitam
                 G.add_edge(i, j, weight=dictMat[i-1][j], color='black')
 
-
     # warnain semua jadi biru
     node_colors = []
     for i in range(len(dictMat)):
@@ -92,8 +87,6 @@ def main():
     edges = G.edges()
     colors = [G[u][v]['color'] for u,v in edges]
     
-    
-
     # Menggambar graf menggunakan matplotlib
     nx.draw_networkx_labels(G, koordinat)
     nx.draw_networkx_edges(G, koordinat,edge_color=colors, width=1.0)
@@ -103,7 +96,6 @@ def main():
     print("Visualisasi Graf akan ditampilkan")
     print("Tutup visualisasi untuk melanjutkan")
     plt.show()
-    
     
     showMap(koordinat, path)
     tanyaMaps = input("Apakah ingin menampilkan maps? (Y/N): ")
@@ -115,6 +107,8 @@ def main():
     if(pilihan=="Y" or pilihan=="y"):
         main()
     else:
+        splashScreen()
+        print("===========================================")
         print("Terima kasih telah menggunakan program ini")
 
 if __name__ == "__main__":
